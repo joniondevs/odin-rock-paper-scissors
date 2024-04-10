@@ -27,9 +27,68 @@ function getPlayerChoice(){
     }
 }
 
-for(let i = 0; i < 5; i++){
-    console.log(getComputerChoice());
+function compareHand(pickA, pickB)
+{
+    if(pickA === pickB)
+    {
+        return 0; // a tie
+    }else
+    {
+        let result = 0;
+
+        switch(pickA)
+        {
+            case "rock":
+                result = pickB ==="paper" ? 0 : 1;
+                result = pickB ==="scissors" ? 1 : 0;
+                break;
+
+            case "paper":
+                result = pickB ==="rock" ? 1 : 0;
+                result = pickB ==="scissors" ? 0 : 1;
+                break;
+
+            case "scissors":
+                result = pickB ==="rock" ? 0 : 1;
+                result = pickB ==="paper" ? 1 : 0;
+                break;
+        }
+        
+        return result;
+    }
 }
 
-let playerPick = getPlayerChoice();
-console.log(`player's choice: ${playerPick}`);
+function printWinner(playerScore, cpuScore)
+{
+    if(playerScore === cpuScore)
+    {
+        console.log("It's a Draw! How exciting!");
+    }
+    else if(playerScore > cpuScore)
+    {
+        console.log("Player Wins!");
+    }else{
+        console.log("CPU Wins!");
+    }
+}
+
+let playerScore = 0;
+let cpuScore = 0;
+let rounds = 5;
+
+for(let i = 0; i < rounds; i++){
+    let cpuPick = getComputerChoice();
+    let playerPick = getPlayerChoice();
+
+    console.log(`cpu picks ${cpuPick}`);
+    console.log(`player picks ${playerPick}`);
+
+    cpuScore += compareHand(cpuPick, playerPick);
+    playerScore += compareHand(playerPick, cpuPick);
+
+    console.log(`scores: cpu:${cpuScore} player:${playerScore}`);
+}
+
+printWinner(playerScore, cpuScore);
+
+
