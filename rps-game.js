@@ -86,7 +86,12 @@ for(let i = 0; i < rounds; i++){
     cpuScore += compareHand(cpuPick, playerPick);
     playerScore += compareHand(playerPick, cpuPick);
 
-    console.log(`scores: cpu:${cpuScore} player:${playerScore}`);
+    console.log(`scores after round ${i+1}: cpu:${cpuScore} player:${playerScore}`);
+
+    if(playerScore > rounds / 2 || cpuScore > rounds / 2)
+    {
+        break;
+    }
 }
 
 printWinner(playerScore, cpuScore);
