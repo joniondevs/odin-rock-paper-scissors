@@ -27,6 +27,11 @@ function getPlayerChoice(){
     }
 }
 
+function onPlayerPick(event)
+{
+    console.log(`player picked ${event.target.id}`);
+}
+
 function compareHand(pickA, pickB)
 {
     if(pickA === pickB)
@@ -72,6 +77,11 @@ function printWinner(playerScore, cpuScore)
     }
 }
 
+// ui event handlers
+const buttons = document.querySelector("#player-options");
+buttons.addEventListener("click", (event) => { console.log(event.target.id); });
+
+// game
 let playerScore = 0;
 let cpuScore = 0;
 let rounds = 0;
