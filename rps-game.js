@@ -74,7 +74,7 @@ function printWinner(playerScore, cpuScore)
 
 let playerScore = 0;
 let cpuScore = 0;
-let rounds = 5;
+let rounds = 0;
 
 for(let i = 0; i < rounds; i++){
     let cpuPick = getComputerChoice();
