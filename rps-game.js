@@ -59,21 +59,27 @@ function compareHand(pickA, pickB)
 }
 
 function playRound(playerChoice){
+    if(currentRound >= rounds) { return ""; }
+    
     let playerPick = playerChoice;
     let cpuPick = getComputerChoice();
 
-    roundLog.textContent = `cpu picks ${cpuPick} and player picks ${playerPick}`;
-
     cpuScore += compareHand(cpuPick, playerPick);
     playerScore += compareHand(playerPick, cpuPick);
-
+    
     currentRound += 1;
-    resultPara.textContent = `scores after round ${currentRound}: cpu:${cpuScore} player:${playerScore}`;
-
+    updateRoundResult(cpuPick, playerPick);
+    
     if(currentRound >= rounds || playerScore > rounds / 2 || cpuScore > rounds / 2)
     {
         printWinner();
     }
+}
+
+function updateRoundResult(cpuPick, playerPick)
+{
+    roundLog.textContent = `Round ${currentRound}: cpu picks ${cpuPick}, player picks ${playerPick}`;
+    resultPara.textContent = `Scores after round ${currentRound}: cpu:${cpuScore} player:${playerScore}\r\n`;
 }
 
 function printWinner(playerScore, cpuScore)
@@ -81,12 +87,15 @@ function printWinner(playerScore, cpuScore)
     if(playerScore === cpuScore)
     {
         console.log("It's a Draw! How exciting!");
+        gameResult.textContent = "It's a Draw! How exciting!";
     }
     else if(playerScore > cpuScore)
     {
         console.log("Player Wins!");
+        gameResult.textContent = "Player Wins!";
     }else{
         console.log("CPU Wins!");
+        gameResult.textContent = "CPU Wins!";
     }
 }
 
@@ -98,6 +107,8 @@ const roundLog = document.querySelector("#round-log");
 
 const resultPara = document.querySelector("#round-result");
 resultPara.textContent = "Start game by picking either rock, paper or scissors";
+
+const gameResult = document.querySelector("#game-result");
 
 // game
 let playerScore = 0;
